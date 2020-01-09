@@ -11,7 +11,7 @@ Faster R-CNN은 영상 안의 여러 사물을 한꺼번에 분류하고, 데이
 
 이 두 모듈은 전체적으로 하나의 object detection network라고 볼 수 있음
 
-[##_Image|kage@4QXbM/btqA2bZlREb/QZvjb3w1nD8HumjSrtrSr1/img.png|alignCenter|width="457" height="410" data-origin-width="0" data-origin-height="0"|||_##]
+![1](./faster-r-cnn/1.png)
 
 ### Input Images
 
@@ -54,7 +54,7 @@ Classification Layer에서는 anchor당 2개의 predictions 값을 내놓으며,
 
 Regression Layer (또는 Bounding box adjustment layer)는 각 anchor당 델타 값들 4개의 값을 내놓는다. 이 델타 값들은 anchors에 적용되어서 최종 proposals을 얻게된다. 
 
-[##_Image|kage@udn1h/btqAYGzG7ev/R6uLWvLTK7kKcVNB5FSCgK/img.png|alignCenter|width="544" height="326" data-origin-width="0" data-origin-height="0"|||_##]
+![2](./faster r-cnn/2.png)
 
 -   #### Classifier of Background and Foreground
     
@@ -63,11 +63,11 @@ Classifier를 학습시키기 위한 training data는 RPN에서 얻은 anchors�
 
 모든 anchors를 foreground인지 background인지 분류해야한다. 분류 기준은 어떤 anchor가 ground truth box와 오버랩되는 부분이 크냐이다. 오버랩되는 부분이 크면 foreground(object)이고 적으면 background(객체 아님, 배경)이다. 각각의 anchor마다 foreground인지 아니면 background인지 구별하는 값을 p\* 값이라고 했을 때 공식은 다음과 같다. 
 
-[##_Image|kage@ePITMy/btqA1zzmQi4/tlp5Zf1b5IesSa6KT217m0/img.png|alignCenter|width="242" height="106" data-origin-width="0" data-origin-height="0"|||_##]
+![3](./faster-r-cnn/3.png)
 
 여기서 IoU(Intersection over Union)은 다음과 같이 정의된다.
 
-[##_Image|kage@bHA6lY/btqAZO46Lpj/rZ89sx47RJybwcNVmKiaIk/img.png|alignCenter|width="343" height="74" data-origin-width="0" data-origin-height="0"|||_##]
+![4](./faster-r-cnn/4.png)
 
 일반적으로 IoU 값이 가장 높은 값을 1 값으로 잡으면 되지만 잘 잡히지 않는 경우 0.7로 하면 된다. 하나의 ground-truth box는 여러개의 anchors에  1 값을 줄 수 있다. 0.3 이하의 값으로 떨어지는 anchor는 -1 값을 준다. 그 외 IoU 값이 높지도 낮지도 않은 anchors들 같은 경우는 학습시 사용되지 않는다. (0.7, 0.3은 임의로 정한 값)
 
@@ -76,11 +76,11 @@ Classifier를 학습시키기 위한 training data는 RPN에서 얻은 anchors�
 
 bounding box regression에는 4개의 좌표값을 사용한다. t라는 값 자체가 4개의 좌표값을 갖고 있는 하나의 벡터라고 보면 된다. 다음과 같은 element 값을 가지고 있다. 
 
-[##_Image|kage@bxUjEp/btqA05k1Gah/eETviY9oNmb9h1llApi9UK/img.png|alignCenter|width="172" height="123" data-origin-width="0" data-origin-height="0"|||_##]
+![5](./faster-r-cnn/5.png)
 
 ground-truth vector t\*에는 위와 유사하게 다음과 같은 값을 가지고 있다. 
 
-[##_Image|kage@rQ2zF/btqAZOD4YKM/iv3JfGzZts0uQ9iNfOIK5k/img.png|alignCenter|width="170" height="120" data-origin-width="0" data-origin-height="0"|||_##]
+![6](./faster-r-cnn/6.png)
 
 -   tx,ty : 박스의 center coordinates
     
@@ -122,31 +122,30 @@ ROI 로직
 
 예를 들어, 다음과 같은 8x8 형태의 feature map이 있다고 하자.
 
-[##_Image|kage@5P5HL/btqAY6dUkCt/gmk5pa8X5iypxRz1arkq4K/img.jpg|alignCenter|width="275" height="281" data-origin-width="0" data-origin-height="0"|||_##]
+![7](./faster-r-cnn/7.jpg)
 
 region-proposal의 값은 (0,3), (7,8)일 때 다음과 같다.
 
-[##_Image|kage@R7yiq/btqAXplaZlE/cKgCYEcqcKECm4qJExqDak/img.jpg|alignCenter|width="273" height="284" data-origin-width="0" data-origin-height="0"|||_##]
+![8](./faster-r-cnn/8.jpg)
 
 section의 크기는 2x2로 region proposal을 아래와 같이 나눈다.
 
-[##_Image|kage@bH0GR7/btqAXofu2tR/4ae1NKkgtpeM52Lh1um7T0/img.jpg|alignCenter|width="274" height="283" data-origin-width="0" data-origin-height="0"|||_##]
+![9](./faster-r-cnn/9.jpg)
 
 section의 크기가 모두 동일할 필요는 없다. 다만 크기가 거의 동일하면 된다.
 
 Max value 값을 내면 다음과 같은 output이 생성된다. (이게 Max Pooling 말하는거지?)
 
-[##_Image|kage@cUiZbB/btqAXplaZk5/kpQgPGwki8EucTFfKG3Cmk/img.jpg|alignCenter|width="179" height="180" data-origin-width="0" data-origin-height="0"|||_##]
+![10](./faster-r-cnn/10.jpg)
 
 (RoI Pooling을 사용할 수도 있지만 더 쉬운 Fixed-size Resize instad of RoI Pooling이 있다.)
 
 ### Training
 
-#### Loss Function (응.. 모르겟어
+#### Loss Function 
+![11](./faster-r-cnn/11.png)
 
-[##_Image|kage@38ifS/btqAY7jxn9Y/a2BK3MxeAVnSpj9rkaOkMk/img.png|alignCenter|width="555" height="71" data-origin-width="0" data-origin-height="0"|||_##]
-
-[##_Image|kage@c59IVf/btqAY8bJjv2/wFQvuymexO9rB2SlEzdVZK/img.png|alignCenter|width="876.4600760456274" height="265" data-origin-width="0" data-origin-height="0"|||_##]
+![12](./faster-r-cnn/12.png)
 
 -   #### Training RPN
     
@@ -161,7 +160,7 @@ Max value 값을 내면 다음과 같은 output이 생성된다. (이게 Max Poo
 
 Faster R-CNN에 대한 학습이 완료된 후, RPN 모델을 예측시키면 한 객체당 여러 개의 proposals(bounding boxes)을 얻을 것이다. anchors 자체가 어떤 객체에 중복되기 때문에 proposal 또한 여러개가 되는 것이다. 
 
-[##_Image|kage@pV8tz/btqAXoT4kZE/8NG6JiwGCoDJqQs7eRqVq1/img.jpg|alignCenter|width="285" height="202" data-origin-width="0" data-origin-height="0"|||_##]
+![13](./faster-r-cnn/13.jpg)
 
 문제를 해결하기 위해 non-maximum suppression(NMS) 알고리즘을 사용해서 proposal의 갯수를 줄이도록 한다. NMS는 IoU 값으로 proposal을 모두 정렬하고 RoI 점수가 가장 높은 proposal과 다른 proposal에 대해서 overlapping을 비교한 뒤 overlapping이 높은 것은 특정 threshold 이상이면 proposals에서 삭제하는 방식이다. 그러면 서로 오버랩되지 않으며 RoI가 높은 proposal만 남게된다.
 
