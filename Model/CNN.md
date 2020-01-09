@@ -1,6 +1,7 @@
 **이 글은 다음 블로그[(라온피플)](https://laonple.blog.me/220608018546)를 보고 정리하며 공부한 내용입니다.**
 
-
+ 
+ 
 
 ## **CNN의 구조와 처리 과정**
 
@@ -26,7 +27,7 @@ subsampling은 고정된 위치에 있는 픽셀을 고르거나 subsampling win
 
 ![maxpooling](./img/maxpooling.png)
 
-**이동이나 변형 등에 무관한 학습 결과를 보이려면 (변화에 민감하지 않으려면) ****더 강하고 global한 특징을 추출해야한다. **이를 위해 Convolution과 Subsampling 과정을 여러 번 거친다. 
+**이동이나 변형 등에 무관한 학습 결과를 보이려면 (변화에 민감하지 않으려면) ** **더 강하고 global한 특징을 추출해야한다. **이를 위해 Convolution과 Subsampling 과정을 여러 번 거친다. 
 
 이 특징을 Fully-Connected Network(FCN)를 통해 학습시키게 되면 2차원 영상정보로부터 receptive field와 강한 신호 선택의 특성을 살려 topology(위상?) 변화에 강인한 인식 능력을 갖게된다. 
 
