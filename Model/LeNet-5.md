@@ -6,7 +6,7 @@
 
  Fully Connected Layer (완전연결계층)을 이용해 MNIST 데이터셋을 분류하는 모델을 만들 때 3차원인 MNIST 데이터 (28,28,1)를 input으로 넣어주기 위해 3차원을 1차원의 평평한(flat) 데이터로 펼쳐줘야 했다. 즉, 28 \* 28 \* 1 = 784의 1차원 데이터로 바꾸어 입력층에 넣어주었다. 
 
-![fcl](/lenet-img/fcl.png)
+![fcl](./lenet-img/fcl.png)
 
  이미지 데이터는 3차원의 형상을 가지며, 이 형상에는 공간적 구조(spatial structure)를 가진다. Fully Connected Layer의 문제점은 바로 데이터의 형상(topology)이 무시된단는 것이다.
 
@@ -15,9 +15,9 @@
 LeNet-1이 개발된 후 이를 바탕으로 LeNet-5가 개발되었다. Convolution kernel(filter)의 개수를 늘리고 최종단에 있는 Fully-connected layer의 크기도 커졌다. 
 
 <hr/>
-####LeNet-1과 LeNet-5의 구조는 다음과 같다.
-![lenet-1](/lenet-img/lenet-1.png)
-![lenet-5](/lenet-img/lenet-5.png)
+#### LeNet-1과 LeNet-5의 구조는 다음과 같다.
+![lenet-1](./lenet-img/lenet-1.png)
+![lenet-5](./lenet-img/lenet-5.png)
 
 ### **LeNet-5의 구조**
 
@@ -52,7 +52,7 @@ Average Pooling으로 Subsampling한다. 2x2 필터를 stride 2로 설정하여 
 
 ▶ 0, 1, 2, 3번 피쳐맵이 묶여 6번 필터로 처리되는 것이다. 
 
-![table](/lenet-img/table.png)
+![table](./lenet-img/table.jpg)
 
 -   **S4 Layer**
 
@@ -73,41 +73,17 @@ Fully Connected이며 C5의 결과를 84개의 unit에 연결시킨다. 
 [https://excelsior-cjh.tistory.com/180](https://excelsior-cjh.tistory.com/180)
 
 [
-
-06\. 합성곱 신경망 - Convolutional Neural Networks
-
-이번 포스팅은 핸즈온 머신러닝 교재, cs231n 강의를 가지고 공부한 것을 정리한 포스팅입니다. CNN에 대해 좀 더 간략하게 알고 싶으신 분들은 아래의 링크를 참고하면 됩니다. 간략한 설명 : 합성곱신경망(CNN,..
-
-excelsior-cjh.tistory.com
-
-
-
 ](https://excelsior-cjh.tistory.com/180)
 
 [https://bskyvision.com/418](https://bskyvision.com/418)
 
 [
-
-\[CNN 알고리즘들\] LeNet-5의 구조
-
-지난번에 컨볼루션 신경망(CNN)에 대해 대략적으로 설명했었다. 오늘은 이미지 분류용 CNN 중에 조상격인 LeNet에 대해서 살펴볼 것이다. LeNet의 다양한 버전들(LeNet-1, LeNet-2,...) 중에서 최종 버전인 LeNet-..
-
 bskyvision.com
-
-
-
 ](https://bskyvision.com/418)
 
 [http://www.hellot.net/new\_hellot/magazine/magazine\_read.html?code=205&idx=42920&public\_date=2018-10](http://www.hellot.net/new_hellot/magazine/magazine_read.html?code=205&idx=42920&public_date=2018-10)
 
 [
-
-\[머신러닝 아카데미\] LeNet, AlexNet (1)
-
-\[머신러닝 아카데미\] LeNet, AlexNet (1)
-
 www.hellot.net
-
-
 
 ](http://www.hellot.net/new_hellot/magazine/magazine_read.html?code=205&idx=42920&public_date=2018-10)
