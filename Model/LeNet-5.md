@@ -16,7 +16,9 @@ LeNet-1이 개발된 후 이를 바탕으로 LeNet-5가 개발되었다. Convolu
 
 <hr/>
 #### LeNet-1과 LeNet-5의 구조는 다음과 같다.
+
 ![lenet-1](./lenet-img/lenet-1.png)
+
 ![lenet-5](./lenet-img/lenet-5.png)
 
 ### **LeNet-5의 구조**
@@ -45,13 +47,14 @@ Average Pooling으로 Subsampling한다. 2x2 필터를 stride 2로 설정하여 
 6개의 모든 피쳐맵이 16개의 필터처리 하는 것이 아니라 다음 테이블과 같이 선택적으로 입력 영상을 선택하여 반영하였다. 그 이유는 연산량의 크기를 줄이고, 연결의 symmetry를 깨줌으로써 처음 convolution으로부터 얻은 6개의 low-level feature가 서로 다른 조합으로 섞이며 global feature로 나타나기를 기대하기 때문이다. 
 
 아래 표에서  보면 1열의 값들 0~5는 S2 Layer에서의 피쳐맵들이고, 1행의 0~15는 16장의 필터를 뜻한다. 
-
+<pre>
 예를 들면,
 
      ▶  0, 1, 2번 피쳐맵이 묶여 0번 필터로 처리되고
 
-▶ 0, 1, 2, 3번 피쳐맵이 묶여 6번 필터로 처리되는 것이다. 
-
+     ▶ 0, 1, 2, 3번 피쳐맵이 묶여 6번 필터로 처리되는 것이다. 
+     
+</pre>
 ![table](./lenet-img/table.jpg)
 
 -   **S4 Layer**
@@ -68,22 +71,15 @@ S2와 마찬가지로 subsampling 단계이고, 10x10 피쳐맵 영상을  5x5 
 
 Fully Connected이며 C5의 결과를 84개의 unit에 연결시킨다. 
 
+<hr/>
+
 **Reference**
 
 [https://excelsior-cjh.tistory.com/180](https://excelsior-cjh.tistory.com/180)
 
-[
-](https://excelsior-cjh.tistory.com/180)
 
 [https://bskyvision.com/418](https://bskyvision.com/418)
 
-[
-bskyvision.com
-](https://bskyvision.com/418)
-
 [http://www.hellot.net/new\_hellot/magazine/magazine\_read.html?code=205&idx=42920&public\_date=2018-10](http://www.hellot.net/new_hellot/magazine/magazine_read.html?code=205&idx=42920&public_date=2018-10)
 
-[
-www.hellot.net
-
-](http://www.hellot.net/new_hellot/magazine/magazine_read.html?code=205&idx=42920&public_date=2018-10)
+[www.hellot.net](http://www.hellot.net/new_hellot/magazine/magazine_read.html?code=205&idx=42920&public_date=2018-10)
