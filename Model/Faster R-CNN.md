@@ -11,7 +11,7 @@ Faster R-CNN은 영상 안의 여러 사물을 한꺼번에 분류하고, 데이
 
 이 두 모듈은 전체적으로 하나의 object detection network라고 볼 수 있음
 
-![1](./faster-r-cnn/1.png)
+![1](./faster-r-cnn-img/1.png)
 
 ### Input Images
 
@@ -63,11 +63,11 @@ Classifier를 학습시키기 위한 training data는 RPN에서 얻은 anchors�
 
 모든 anchors를 foreground인지 background인지 분류해야한다. 분류 기준은 어떤 anchor가 ground truth box와 오버랩되는 부분이 크냐이다. 오버랩되는 부분이 크면 foreground(object)이고 적으면 background(객체 아님, 배경)이다. 각각의 anchor마다 foreground인지 아니면 background인지 구별하는 값을 p\* 값이라고 했을 때 공식은 다음과 같다. 
 
-![3](./faster-r-cnn/3.png)
+![3](./faster-r-cnn-img/3.png)
 
 여기서 IoU(Intersection over Union)은 다음과 같이 정의된다.
 
-![4](./faster-r-cnn/4.png)
+![4](./faster-r-cnn-img/4.png)
 
 일반적으로 IoU 값이 가장 높은 값을 1 값으로 잡으면 되지만 잘 잡히지 않는 경우 0.7로 하면 된다. 하나의 ground-truth box는 여러개의 anchors에  1 값을 줄 수 있다. 0.3 이하의 값으로 떨어지는 anchor는 -1 값을 준다. 그 외 IoU 값이 높지도 낮지도 않은 anchors들 같은 경우는 학습시 사용되지 않는다. (0.7, 0.3은 임의로 정한 값)
 
@@ -76,11 +76,11 @@ Classifier를 학습시키기 위한 training data는 RPN에서 얻은 anchors�
 
 bounding box regression에는 4개의 좌표값을 사용한다. t라는 값 자체가 4개의 좌표값을 갖고 있는 하나의 벡터라고 보면 된다. 다음과 같은 element 값을 가지고 있다. 
 
-![5](./faster-r-cnn/5.png)
+![5](./faster-r-cnn-img/5.png)
 
 ground-truth vector t\*에는 위와 유사하게 다음과 같은 값을 가지고 있다. 
 
-![6](./faster-r-cnn/6.png)
+![6](./faster-r-cnn-img/6.png)
 
 -   tx,ty : 박스의 center coordinates
     
@@ -122,30 +122,30 @@ ROI 로직
 
 예를 들어, 다음과 같은 8x8 형태의 feature map이 있다고 하자.
 
-![7](./faster-r-cnn/7.jpg)
+![7](./faster-r-cnn-img/7.jpg)
 
 region-proposal의 값은 (0,3), (7,8)일 때 다음과 같다.
 
-![8](./faster-r-cnn/8.jpg)
+![8](./faster-r-cnn-img/8.jpg)
 
 section의 크기는 2x2로 region proposal을 아래와 같이 나눈다.
 
-![9](./faster-r-cnn/9.jpg)
+![9](./faster-r-cnn-img/9.jpg)
 
 section의 크기가 모두 동일할 필요는 없다. 다만 크기가 거의 동일하면 된다.
 
 Max value 값을 내면 다음과 같은 output이 생성된다. (이게 Max Pooling 말하는거지?)
 
-![10](./faster-r-cnn/10.jpg)
+![10](./faster-r-cnn-img/10.jpg)
 
 (RoI Pooling을 사용할 수도 있지만 더 쉬운 Fixed-size Resize instad of RoI Pooling이 있다.)
 
 ### Training
 
 #### Loss Function 
-![11](./faster-r-cnn/11.png)
+![11](./faster-r-cnn-img/11.png)
 
-![12](./faster-r-cnn/12.png)
+![12](./faster-r-cnn-img/12.png)
 
 -   #### Training RPN
     
@@ -160,7 +160,7 @@ Max value 값을 내면 다음과 같은 output이 생성된다. (이게 Max Poo
 
 Faster R-CNN에 대한 학습이 완료된 후, RPN 모델을 예측시키면 한 객체당 여러 개의 proposals(bounding boxes)을 얻을 것이다. anchors 자체가 어떤 객체에 중복되기 때문에 proposal 또한 여러개가 되는 것이다. 
 
-![13](./faster-r-cnn/13.jpg)
+![13](./faster-r-cnn-img/13.jpg)
 
 문제를 해결하기 위해 non-maximum suppression(NMS) 알고리즘을 사용해서 proposal의 갯수를 줄이도록 한다. NMS는 IoU 값으로 proposal을 모두 정렬하고 RoI 점수가 가장 높은 proposal과 다른 proposal에 대해서 overlapping을 비교한 뒤 overlapping이 높은 것은 특정 threshold 이상이면 proposals에서 삭제하는 방식이다. 그러면 서로 오버랩되지 않으며 RoI가 높은 proposal만 남게된다.
 
